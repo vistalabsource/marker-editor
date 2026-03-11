@@ -1,0 +1,1 @@
+pyinstaller.exe -F -w --name="Marker" .\main.py
