@@ -18,4 +18,4 @@ etc...
 ![demo](./screenshots/main_ui.png)
 
 # ダウンロード
-Releaseからダウンロードしてください
+Releaseからダウンロードするか、compile.ps1を使って手動でビルドしてください。
