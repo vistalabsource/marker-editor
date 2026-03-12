@@ -1,8 +1,43 @@
 name: CI
-on: [push, pull_request]
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: pyinstaller.exe -F -w --name="Marker" .\main.py
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: "pip"
+          cache-dependency-path: |
+            pyproject.toml
+            uv.lock
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install .
+
+      - name: Generate UI bindings
+        run: ./compile_ui.ps1
+        shell: pwsh
+
+      - name: Static compile check
+        run: python -m compileall main.py src ui
+
+      - name: Build executable
+        run: pyinstaller.exe -F -w --name="Marker" .\main.py
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Marker-windows
+          path: dist/Marker.exe
