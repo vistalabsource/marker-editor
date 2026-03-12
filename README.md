@@ -43,5 +43,8 @@ PyInstaller で単一 exe を生成します。
 ## スクリーンショット
 ![Marker markdown editor interface with dark left panel showing heading and Japanese text, and white right preview panel displaying rendered markdown output](./screenshots/main_ui.png)
 
-## ダウンロード
-Release ページからZIPを取得してください。
+# ダウンロード
+Releaseからダウンロードしてください
+
+# ライセンス
+MIT License (c) 2026 vista_lab
